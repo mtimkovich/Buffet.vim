@@ -79,7 +79,8 @@ endif
 let g:loaded_buffet = 1
 
 function! s:open_new_window(dim)
-	exe s:currentposition. ' '.a:dim . 'new buflisttempbuffer412393'
+" 	exe s:currentposition. ' '.a:dim . 'new buflisttempbuffer412393'
+	exe s:currentposition. ' '.a:dim . 'new [buf]'
 	set nonu
 	set nornu
 	setlocal bt=nofile
@@ -198,9 +199,10 @@ function! s:display_buffer_list(gotolastbuffer)
 			call add(s:bufrecent,l:i)
 		endif
 	endfor
-	if (!exists("g:buffetbareview"))
-		call setline(1,"Buffet-".s:buffet_version." ( Enter Number to search for a buffer number )")
-	endif
+" 	if (!exists("g:buffetbareview"))
+" 		call setline(1,"Buffet-".s:buffet_version." (Enter Number to search for a buffer number)")
+		call setline(1,"Buffet-".s:buffet_version)
+" 	endif
 	let s:displayed = []
 	let s:last_buffer_line = 0
 	let l:columns = []
@@ -286,7 +288,8 @@ function! s:close()
 	if(exists("t:tlistbuf"))
 		unlet t:tlistbuf
 		let s:lineonclose = line('.')
-		:bdelete buflisttempbuffer412393
+" 		:bdelete buflisttempbuffer412393
+		:bdelete [buf]
 		echo ''
 		if(s:sourcewindow != -1) 
 			exe s:sourcewindow. ' wincmd w'
